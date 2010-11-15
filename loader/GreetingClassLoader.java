@@ -27,30 +27,4 @@ public class GreetingClassLoader extends ClassLoader {
       throw new ClassNotFoundException("Could not load " + className + ".class.");
     }
   }
-
-  public Class loadClass(String className, boolean resolve) throws ClassNotFoundException {
-    Class cls = findLoadedClass(className);
-    if(cls == null) {
-      try {
-        ClassLoader parent = getParent();
-        if(parent == null) {
-          cls = getSystemClassLoader().loadClass(className);
-        } else {
-          cls = parent.loadClass(className);
-        }
-      } catch(ClassNotFoundException e) {
-        cls = findClass(className);
-      }
-    }
-
-    try {
-      if(resolve) {
-        resolveClass(cls);
-      }
-    } catch(Error e) {
-        e.printStackTrace();
-        throw e;
-    }
-    return cls;
-  }
 }
