@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ant lang -Ddefinition="$1 $2"
+ant lang -Dlanguage="$1" -Dgreeting="$2"

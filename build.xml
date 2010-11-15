@@ -36,7 +36,8 @@
   <target name="lang" description="Create a new language" depends="build-lang">
     <java classname="Builder" fork="true" dir="builder">
       <arg value="${basedir}/languages" />
-      <arg line="${definition}" />
+      <arg value="${language}" />
+      <arg value="${greeting}" />
     </java>
   </target>
 
