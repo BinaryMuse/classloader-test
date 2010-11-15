@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name="classloader-test" default="run" basedir=".">
+
+  <property environment="env" />
+
+  <target name="compile" description="Compile source">
+    <javac srcdir="languages" includes="**" encoding="utf-8"
+      destdir="languages" includeAntRuntime="false"
+      source="1.6" target="1.6" nowarn="false"
+      debug="true" debuglevel="lines,vars,source" />
+    <javac srcdir="loader" includes="**" encoding="utf-8"
+      destdir="loader" includeAntRuntime="false"
+      source="1.6" target="1.6" nowarn="false"
+      debug="true" debuglevel="lines,vars,source" />
+  </target>
+
+  <target name="run" description="Run the project" depends="compile">
+    <java classname="Greeting" fork="true" dir="loader">
+      <arg value="${basedir}/languages" />
+    </java>
+  </target>
+
+  <target name="clean" description="Cleans the project">
+    <delete failonerror="false">
+      <fileset dir="." includes="**/*.class" />
+    </delete>
+  </target>
+
+  <target name="build-lang" description="Build the language builder">
+    <javac srcdir="builder" includes="**" encoding="utf-8"
+      destdir="builder" includeAntRuntime="false"
+      source="1.6" target="1.6" nowarn="false"
+      debug="true" debuglevel="lines,vars,source" />
+  </target>
+
+  <target name="lang" description="Create a new language" depends="build-lang">
+    <java classname="Builder" fork="true" dir="builder">
+      <arg value="${basedir}/languages" />
+      <arg line="${definition}" />
+    </java>
+  </target>
+
+</project>
