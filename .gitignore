@@ -1,1 +1,7 @@
 **/*.class
+languages/*
+-languages/English.java
+-languages/Hawaiian.java
+-languages/Latin.java
+-languages/Norwegian.java
+-languages/Spanish.java
